@@ -13,9 +13,9 @@ response {
   body("""
   {
     "id": 1000,
-    "name": "test",
-    "writter": "test writter",
-    "price": 100.00
+    "name": "test book",
+    "writter": "test wrtter",
+    "price": 102.5
   }
   """)
   headers {

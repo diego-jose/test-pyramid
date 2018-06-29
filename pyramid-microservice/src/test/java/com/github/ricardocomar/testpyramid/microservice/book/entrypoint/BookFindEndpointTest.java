@@ -22,7 +22,7 @@ import com.github.ricardocomar.testpyramid.microservice.PyramidMicroserviceAppli
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = { EntrypointConfiguration.class })
-@DirtiesContext
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @SpringBootTest(classes = PyramidMicroserviceApplication.class)
 @ActiveProfiles("entrypoint")
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:simpleBooks.sql")
@@ -42,13 +42,25 @@ public class BookFindEndpointTest {
 	public void testFindExisting() throws Exception {
 
 		this.mockMvc
-			.perform(MockMvcRequestBuilders.get("/api/book/1000")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
-			.andExpect(MockMvcResultMatchers.status().isOk())
-			.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-			.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1000))
-			.andExpect(MockMvcResultMatchers.jsonPath("$.writter").value("test writter"))
-			;
+				.perform(MockMvcRequestBuilders.get("/api/book/1000")
+						.accept(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(MockMvcResultMatchers.jsonPath("$").isMap())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1000))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.writter").value("test writter"))
+		;
+	}
+	@Test
+	public void testFindList() throws Exception {
+
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.get("/api/book?start=1&maxResult=10")
+						.accept(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
+		;
 	}
 
 }

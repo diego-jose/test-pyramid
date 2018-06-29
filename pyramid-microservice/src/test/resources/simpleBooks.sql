@@ -1,2 +1,11 @@
-
+delete from book_entity
 insert into book_entity (name, writter, price, id) values ('test', 'test writter', 100.00, 1000)
+insert into book_entity (name, writter, price, id) values ('test1', 'test writter1', 200.00, 1001)
+insert into book_entity (name, writter, price, id) values ('test2', 'test writter2', 300.00, 1002)
+insert into book_entity (name, writter, price, id) values ('test3', 'test writter3', 400.00, 1003)
+insert into book_entity (name, writter, price, id) values ('test4', 'test writter4', 500.00, 1004)
+insert into book_entity (name, writter, price, id) values ('test5', 'test writter5', 600.00, 1005)
+insert into book_entity (name, writter, price, id) values ('test6', 'test writter6', 700.00, 1006)
+insert into book_entity (name, writter, price, id) values ('test7', 'test writter7', 800.00, 1007)
+insert into book_entity (name, writter, price, id) values ('test8', 'test writter8', 900.00, 1008)
+insert into book_entity (name, writter, price, id) values ('test9', 'test writter9', 9999.00, 1009)
