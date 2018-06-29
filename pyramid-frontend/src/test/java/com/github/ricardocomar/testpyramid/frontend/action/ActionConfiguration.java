@@ -11,10 +11,10 @@ import com.github.ricardocomar.testpyramid.frontend.client.BookService;
 @Configuration
 @Profile("service")
 public class ActionConfiguration {
-	
-	@Bean @Primary
+
+	/*@Bean @Primary
 	public BookService bookService() {
 		return Mockito.mock(BookService.class);
-	}
+	}*/
 
 }

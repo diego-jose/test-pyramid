@@ -26,7 +26,7 @@ import com.github.ricardocomar.testpyramid.frontend.model.Book;
 @ContextConfiguration(classes = { EntrypointConfiguration.class })
 @DirtiesContext
 @SpringBootTest(classes = PyramidFrontEndApplication.class)
-@AutoConfigureStubRunner(ids = {"com.github.ricardocomar.testpyramid.microservice:pyramid-microservice:${spring-cloud-contract.version}:stubs:8090"}, stubsMode = StubRunnerProperties.StubsMode.LOCAL)
+@AutoConfigureStubRunner(ids = {"com.github.ricardocomar.testpyramid.microservice:pyramid-microservice:+:stubs:8090"}, stubsMode = StubRunnerProperties.StubsMode.LOCAL)
 @ActiveProfiles("entrypoint")
 public class BookFindEntrypointTest {
 
@@ -35,8 +35,8 @@ public class BookFindEntrypointTest {
 
 	private MockMvc mockMvc;
 
-	final Book book = Book.builder().id(1000l).name("test")
-			.writter("test writter").price(100.00).build();
+	final Book book = Book.builder().id(1000l).name("test book")
+			.writter("test wrtter").price(102.5).build();
 	final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Before

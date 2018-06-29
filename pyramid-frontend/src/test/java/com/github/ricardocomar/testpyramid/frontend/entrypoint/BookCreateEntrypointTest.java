@@ -1,5 +1,10 @@
 package com.github.ricardocomar.testpyramid.frontend.entrypoint;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.ricardocomar.testpyramid.frontend.PyramidFrontEndApplication;
+import com.github.ricardocomar.testpyramid.frontend.model.Book;
+import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,12 +21,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.ricardocomar.testpyramid.frontend.PyramidFrontEndApplication;
-import com.github.ricardocomar.testpyramid.frontend.model.Book;
-import com.github.tomakehurst.wiremock.client.WireMock;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = { EntrypointConfiguration.class })
@@ -47,6 +46,7 @@ public class BookCreateEntrypointTest {
 			.writter("John Snow").price(120.0).build();
 	
 	final ObjectMapper objectMapper = new ObjectMapper();
+
 
 	@Before
 	public void setup() {

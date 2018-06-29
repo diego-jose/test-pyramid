@@ -5,9 +5,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
@@ -28,30 +32,31 @@ import com.github.ricardocomar.testpyramid.frontend.usecase.BookCreateUseCase;
 @ActiveProfiles("service")
 public class BookCreateActionTest {
 
+	@MockBean
+	BookService mockService;
+
 	@Autowired
 	BookCreateUseCase action;
-	
-	@Autowired
-	BookService mockService;
-	
+
 	@Before
 	public void before() {
 		Mockito.reset(mockService);
 	}
-	
+
+
 	@Test
 	public void testSuccess() throws Exception {
 		BookPojo body = BookPojo.builder().id(123L).name("Test").price(10.0).writter("John Snow").build();
 		ResponseEntity<BookPojo> pojo = new ResponseEntity<BookPojo>(body, HttpStatus.CREATED);
 		Mockito.when(mockService.create(Mockito.any())).thenReturn(pojo);
-		
+
 		Book book = Book.builder().name("Test").price(10.0).writter("John Snow").build();
 		Book saved = action.save(book);
-		
+
 		Book expectedBook = Book.builder().id(123L).name("Test").price(10.0).writter("John Snow").build();
 		Assert.assertThat(saved, Matchers.equalTo(expectedBook));
 	}
-	
+
 	@Test
 	public void testError() throws Exception {
 		Mockito.when(mockService.create(Mockito.any())).thenThrow(new RuntimeException("Expected error"));
